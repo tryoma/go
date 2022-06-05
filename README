@@ -1,0 +1,101 @@
+Go では go.mod というファイルでパッケージ管理（外部ライブラリの管理）を行います。
+
+次のコマンドを実行すると、go.mod というファイルが作成されます。VSCode でターミナルを立ち上げるショートカットキーは control + shift + @ です。
+$ go mod init $(basename `pwd`)
+
+上手く行くと次のようなログが表示されます。
+go: creating new go.mod: module go-tech-blog
+
+VSCode 上で左のファイルツリーを見ると go.mod が作成されています。
+
+# go プログラムを実行します
+go run main.go
+
+外部パッケージである echo を利用するので、プログラムを起動する際には echo のソースコードも必要になります。
+こうした外部パッケージを管理する手段として、Go では go mod コマンドが準備されています。
+
+パッケージを管理していくにあたり、まずはターミナルを起動して次のコマンドを実行します。
+$ go mod tidy
+
+go mod tidy はソースコードを検査して、どのような外部パッケージを利用しているかを判定します。
+ソースコード内で利用されている外部パッケージは go.mod と go.sum というファイルに書き出されます。
+直接的に利用しているパッケージは go.mod に、間接的に利用しているパッケージは go.sum に記載されます。
+
+go mod tidy コマンドで依存パッケージの書き出しが完了したら、次は下記のコマンドを用いて外部パッケージのソースコードを PC にダウンロード（キャッシュ）します。
+$ go mod download
+
+ダウンロードされた外部パッケージのソースコードは $HOME/go/pkg/mod/ に配置されます。
+tree コマンドを利用して確認してみましょう。
+tree $HOME/go/pkg/mod -L 3 -d
+
+今回はテンプレートエンジンとして pongo2 というライブラリを利用していきます。
+pongo2 は Python 製のフルスタック Web フレームワークである Django ライクな文法を利用できるテンプレートエンジンです。使い方に迷った際は Django のドキュメント が参考になります。
+
+ホットリロードを実現するためのツールとして、本教材では fresh を採用します。
+
+
+
+
+
+Mysql
+mysql.server stop
+mysql.server start
+
+$ mysql -u workuser -p
+Enter password: Passw0rd!
+
+mysql>
+mysql> use techblog;
+Database changed
+
+INSERT INTO articles (title, body, created, updated) VALUES
+('タイトル 8', '', NOW(), NOW()),
+('タイトル 9', '', NOW(), NOW()),
+('タイトル 10', '', NOW(), NOW()),
+('タイトル 11', '', NOW(), NOW()),
+('タイトル 12', '', NOW(), NOW()),
+('タイトル 13', '', NOW(), NOW()),
+('タイトル 14', '', NOW(), NOW()),
+('タイトル 15', '', NOW(), NOW()),
+('タイトル 16', '', NOW(), NOW()),
+('タイトル 17', '', NOW(), NOW()),
+('タイトル 18', '', NOW(), NOW()),
+('タイトル 19', '', NOW(), NOW()),
+('タイトル 20', '', NOW(), NOW()),
+('タイトル 21', '', NOW(), NOW()),
+('タイトル 22', '', NOW(), NOW()),
+('タイトル 23', '', NOW(), NOW()),
+('タイトル 24', '', NOW(), NOW()),
+('タイトル 25', '', NOW(), NOW()),
+('タイトル 26', '', NOW(), NOW()),
+('タイトル 27', '', NOW(), NOW()),
+('タイトル 28', '', NOW(), NOW()),
+('タイトル 29', '', NOW(), NOW()),
+('タイトル 30', '', NOW(), NOW());
+
+\q
+
+
+goose up
+goose down
+goose status
+
+
+Fetch API
+https://developer.mozilla.org/ja/docs/Web/API/Fetch_API/Using_Fetch
+
+付録 1：Herokuにデプロイしよう
+目標物を作成するまでの流れ
+  Heroku アカウントの作成
+  The Heroku CLI のインストール
+  Heroku CLI でログイン
+  Heroku アプリケーションの作成
+  データベースの作成
+  データベースの設定
+  マイグレーションの設定
+  ポート番号の設定
+  Procfile の作成
+  go.mod の編集
+  Git リポジトリの作成
+  デプロイの実行
+
